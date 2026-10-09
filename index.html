@@ -1711,43 +1711,14 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       var _initial$income, _initial$weitereEinko, _initial$expenses, _initial$notgroschenS, _initial$zielPuffer, _initial$aktuellerSta, _initial$horizonJahre, _initial$rateKons, _initial$rateMod, _initial$rateWachs, _initial$stockCharts, _initial$allokation, _initial$goals, _initial$notes, _initial$todos, _initial$einkaufStart;
       const initial = loadSaved();
       const [activeTab, setActiveTab] = useState("uebersicht");
-      const [income, setIncome] = useState((_initial$income = initial.income) !== null && _initial$income !== void 0 ? _initial$income : 1600);
+      const [income, setIncome] = useState((_initial$income = initial.income) !== null && _initial$income !== void 0 ? _initial$income : 0);
       const [weitereEinkommen, setWeitereEinkommen] = useState((_initial$weitereEinko = initial.weitereEinkommen) !== null && _initial$weitereEinko !== void 0 ? _initial$weitereEinko : initial.zweitEinkommen ? [{
         id: 1,
         name: "2. Einkommen",
         amount: initial.zweitEinkommen
-      }] : [{
-        id: 1,
-        name: "Überhang",
-        amount: 800
-      }]);
-      const [expenses, setExpenses] = useState(((_initial$expenses = initial.expenses) !== null && _initial$expenses !== void 0 ? _initial$expenses : [{
-        id: 1,
-        name: "Autorate",
-        amount: 460,
-        type: "giro_fix"
-      }, {
-        id: 2,
-        name: "Sport",
-        amount: 52,
-        type: "giro"
-      }, {
-        id: 3,
-        name: "Benzin",
-        amount: 70,
-        type: "giro"
-      }, {
-        id: 4,
-        name: "Lebensmittel / Meal-Prep",
-        amount: 200,
-        type: "giro"
-      }, {
-        id: 5,
-        name: "Miete",
-        amount: 1234.5,
-        type: "giro"
-      }]).map(normalizeExpense));
-      const [notgroschenSparrate, setNotgroschenSparrate] = useState((_initial$notgroschenS = initial.notgroschenSparrate) !== null && _initial$notgroschenS !== void 0 ? _initial$notgroschenS : 350);
+      }] : []);
+      const [expenses, setExpenses] = useState(((_initial$expenses = initial.expenses) !== null && _initial$expenses !== void 0 ? _initial$expenses : []).map(normalizeExpense));
+      const [notgroschenSparrate, setNotgroschenSparrate] = useState((_initial$notgroschenS = initial.notgroschenSparrate) !== null && _initial$notgroschenS !== void 0 ? _initial$notgroschenS : 0);
       const [zielPuffer, setZielPuffer] = useState((_initial$zielPuffer = initial.zielPuffer) !== null && _initial$zielPuffer !== void 0 ? _initial$zielPuffer : 4);
       const [aktuellerStand, setAktuellerStand] = useState((_initial$aktuellerSta = initial.aktuellerStand) !== null && _initial$aktuellerSta !== void 0 ? _initial$aktuellerSta : 0);
       const [horizonJahre, setHorizonJahre] = useState((_initial$horizonJahre = initial.horizonJahre) !== null && _initial$horizonJahre !== void 0 ? _initial$horizonJahre : 10);
@@ -1755,66 +1726,11 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       const [rateMod, setRateMod] = useState((_initial$rateMod = initial.rateMod) !== null && _initial$rateMod !== void 0 ? _initial$rateMod : 4);
       const [rateWachs, setRateWachs] = useState((_initial$rateWachs = initial.rateWachs) !== null && _initial$rateWachs !== void 0 ? _initial$rateWachs : 6);
       const [hidden, setHidden] = useState({});
-      const [stockCharts, setStockCharts] = useState((_initial$stockCharts = initial.stockCharts) !== null && _initial$stockCharts !== void 0 ? _initial$stockCharts : [{
-        id: 1,
-        title: "Apple",
-        symbol: "NASDAQ:AAPL",
-        mode: "detail"
-      }, {
-        id: 2,
-        title: "Microsoft",
-        symbol: "NASDAQ:MSFT",
-        mode: "compact"
-      }, {
-        id: 3,
-        title: "NVIDIA",
-        symbol: "NASDAQ:NVDA",
-        mode: "compact"
-      }]);
+      const [stockCharts, setStockCharts] = useState((_initial$stockCharts = initial.stockCharts) !== null && _initial$stockCharts !== void 0 ? _initial$stockCharts : []);
       const [newChartTitle, setNewChartTitle] = useState("");
       const [newChartSymbol, setNewChartSymbol] = useState("");
-      const [allokation, setAllokation] = useState((_initial$allokation = initial.allokation) !== null && _initial$allokation !== void 0 ? _initial$allokation : [{
-        id: 1,
-        name: "Aktien-ETF (global)",
-        pct: 70
-      }, {
-        id: 3,
-        name: "Gold (physisch / ETC)",
-        pct: 12
-      }, {
-        id: 4,
-        name: "Silber (ETC)",
-        pct: 3
-      }, {
-        id: 5,
-        name: "Cash-Reserve / Tagesgeld",
-        pct: 15
-      }]);
-      const [goals, setGoals] = useState(((_initial$goals = initial.goals) !== null && _initial$goals !== void 0 ? _initial$goals : [{
-        id: 1,
-        name: "iPad + Zubehör (Studium)",
-        zielbetrag: 525,
-        zeitraum: 2,
-        prioritaet: 1
-      }, {
-        id: 2,
-        name: "Iphone",
-        zielbetrag: 0,
-        zeitraum: 1,
-        prioritaet: 2
-      }, {
-        id: 3,
-        name: "Kissen",
-        zielbetrag: 0,
-        zeitraum: 1,
-        prioritaet: 3
-      }, {
-        id: 4,
-        name: "Urlaub",
-        zielbetrag: 0,
-        zeitraum: 1,
-        prioritaet: 4
-      }]).map(normalizeGoal));
+      const [allokation, setAllokation] = useState((_initial$allokation = initial.allokation) !== null && _initial$allokation !== void 0 ? _initial$allokation : []);
+      const [goals, setGoals] = useState(((_initial$goals = initial.goals) !== null && _initial$goals !== void 0 ? _initial$goals : []).map(normalizeGoal));
       const [sortKey, setSortKey] = useState(null);
       const [sortDir, setSortDir] = useState("asc");
       const [notes, setNotes] = useState((_initial$notes = initial.notes) !== null && _initial$notes !== void 0 ? _initial$notes : "");
@@ -1900,82 +1816,25 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           return;
         }
         localStorage.removeItem(STORAGE_KEY);
-        setIncome(1615);
+        setIncome(0);
         setWeitereEinkommen([]);
-        setExpenses([{
-          id: 1,
-          name: "Autorate",
-          amount: 460,
-          type: "giro_fix"
-        }, {
-          id: 2,
-          name: "Sport",
-          amount: 52,
-          type: "giro"
-        }, {
-          id: 3,
-          name: "Benzin",
-          amount: 70,
-          type: "giro"
-        }, {
-          id: 4,
-          name: "Lebensmittel / Meal-Prep",
-          amount: 300,
-          type: "giro"
-        }]);
-        setNotgroschenSparrate(350);
+        setExpenses([]);
+        setNotgroschenSparrate(0);
         setZielPuffer(4);
         setAktuellerStand(0);
         setHorizonJahre(10);
         setRateKons(2);
         setRateMod(4);
         setRateWachs(6);
-        setAllokation([{
-          id: 1,
-          name: "Aktien-ETF (global)",
-          pct: 40
-        }, {
-          id: 2,
-          name: "Anleihen / Renten-ETF",
-          pct: 30
-        }, {
-          id: 3,
-          name: "Gold (physisch / ETC)",
-          pct: 12
-        }, {
-          id: 4,
-          name: "Silber (ETC)",
-          pct: 3
-        }, {
-          id: 5,
-          name: "Cash-Reserve / Tagesgeld",
-          pct: 15
-        }]);
-        setGoals([{
-          id: 1,
-          name: "iPad + Zubehör (Studium)",
-          zielbetrag: 525,
-          zeitraum: 2
-        }]);
+        setAllokation([]);
+        setGoals([]);
         setNotes("");
         setTodos([]);
         setPurchases([]);
         setPaid({});
         setBooked({});
         setEinkaufStart(monthKeyOf(new Date()));
-        setStockCharts([{
-          id: 1,
-          title: "Apple",
-          symbol: "NASDAQ:AAPL"
-        }, {
-          id: 2,
-          title: "Microsoft",
-          symbol: "NASDAQ:MSFT"
-        }, {
-          id: 3,
-          title: "NVIDIA",
-          symbol: "NASDAQ:NVDA"
-        }]);
+        setStockCharts([]);
         setNewChartTitle("");
         setNewChartSymbol("");
         setConfirmingReset(false);
