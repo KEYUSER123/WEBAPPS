@@ -9,11 +9,36 @@
     :root{color-scheme:dark;--bg:#101613;--panel:#19221d;--line:#2d3a32;--text:#f3f2e9;--muted:#a8b3aa;--gold:#e0b45c;--green:#a8c7a7}
     *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at top,#26372d 0%,var(--bg) 58%);color:var(--text);font:16px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;display:flex;align-items:center;justify-content:center;padding:28px}
     main{width:min(900px,100%)}.eyebrow{color:var(--green);text-transform:uppercase;letter-spacing:.16em;font-size:.75rem;font-weight:700}h1{font-size:clamp(2rem,6vw,3.6rem);line-height:1.05;letter-spacing:-.04em;margin:.6rem 0 1rem}p{color:var(--muted);max-width:620px}.apps{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:32px}.app{display:flex;flex-direction:column;min-height:230px;padding:24px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.015));text-decoration:none;color:inherit;transition:transform .18s,border-color .18s}.app:hover,.app:focus-visible{transform:translateY(-3px);border-color:var(--gold);outline:none}.icon{width:52px;height:52px;display:grid;place-items:center;border-radius:16px;background:#2b382e;font-size:1.6rem}.app h2{margin:20px 0 4px;font-size:1.35rem}.app p{font-size:.95rem;margin:0 0 20px}.open{margin-top:auto;color:var(--gold);font-weight:700}.foot{margin-top:28px;font-size:.8rem;color:#7f8d82}
+
+    .auth-screen{width:min(520px,100%);margin:auto;padding:28px;border:1px solid var(--line);border-radius:22px;background:rgba(25,34,29,.96);box-shadow:0 20px 70px #0005}
+    .auth-screen h1{font-size:clamp(1.8rem,5vw,2.6rem)}
+    .auth-form{display:grid;gap:12px;margin-top:22px}
+    .auth-form label{display:grid;gap:6px;color:var(--muted);font-size:.9rem}
+    .auth-form input{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#101613;color:var(--text);font:inherit}
+    .auth-buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+    .auth-buttons button,.logout{border:1px solid var(--line);border-radius:10px;padding:11px 14px;background:#2b382e;color:var(--text);font:inherit;font-weight:700;cursor:pointer}
+    .auth-buttons .primary{background:var(--gold);color:#17231f;border-color:var(--gold)}
+    #auth-message{min-height:1.5em;color:var(--green);overflow-wrap:anywhere}
+    .dashhead{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+    .userline{font-size:.85rem;color:var(--muted);margin-top:10px}
+    [hidden]{display:none!important}
   </style>
 </head>
 <body>
   <main>
-    <div class="eyebrow">Dein persönlicher Bereich</div>
+    <section id="auth-screen" class="auth-screen" aria-labelledby="auth-title" hidden>
+      <div class="eyebrow">Sicherer persönlicher Bereich</div>
+      <h1 id="auth-title">Willkommen zurück.</h1>
+      <p>Melde dich einmal an. Finanzplan und Fitness-Tracker verwenden dasselbe Supabase-Konto.</p>
+      <form id="auth-form" class="auth-form">
+        <label>E-Mail-Adresse<input id="auth-email" type="email" autocomplete="email" required></label>
+        <label>Passwort<input id="auth-password" type="password" autocomplete="current-password" minlength="6" required></label>
+        <div class="auth-buttons"><button class="primary" type="submit">Anmelden</button><button id="signup-button" type="button">Konto erstellen</button></div>
+      </form>
+      <p id="auth-message" role="status" aria-live="polite"></p>
+    </section>
+    <section id="dashboard-content" hidden>
+    <div class="dashhead"><div class="eyebrow">Dein persönlicher Bereich</div><button class="logout" id="logout-button" type="button">Abmelden</button></div>
     <h1>Alles im Blick.<br>Ein Ort für deine Ziele.</h1>
     <p>Wähle die App, die du öffnen möchtest. Beide Anwendungen bleiben eigenständig und können unabhängig voneinander aktualisiert werden.</p>
     <section class="apps" aria-label="Meine Apps">
@@ -30,7 +55,30 @@
         <span class="open">Fitness öffnen ↗</span>
       </a>
     </section>
-    <div class="foot">Privates Dashboard · Die Datenverwaltung der einzelnen Apps bleibt unverändert.</div>
+    <div class="userline" id="user-line"></div>
+    <div class="foot">Privates Dashboard · Gemeinsame Anmeldung für beide Apps.</div>
+    </section>
   </main>
+  <script>
+  (function(){
+    'use strict';
+    var CFG={url:'https://ycwwhkvcpzqidcgvxrfe.supabase.co',key:'sb_publishable_3PxyzyDJOBo5RhaDnYAv6Q_SSluXGD_' };
+    var authScreen=document.getElementById('auth-screen');
+    var content=document.getElementById('dashboard-content');
+    var form=document.getElementById('auth-form');
+    var message=document.getElementById('auth-message');
+    var client=null, busy=false;
+    function say(t){message.textContent=t;}
+    function showLogin(t){content.hidden=true;authScreen.hidden=false;if(t)say(t);}
+    function showDashboard(user){authScreen.hidden=true;content.hidden=false;document.getElementById('user-line').textContent='Angemeldet als '+(user.email||'Benutzer')+'.';}
+    function loadSDK(){return new Promise(function(resolve,reject){if(window.supabase&&window.supabase.createClient)return resolve();var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.js';s.onload=function(){window.supabase&&window.supabase.createClient?resolve():reject(new Error('Supabase-Bibliothek konnte nicht gestartet werden.'));};s.onerror=function(){reject(new Error('Supabase-Bibliothek ist nicht erreichbar.'));};document.head.appendChild(s);});}
+    async function init(){try{await loadSDK();client=window.supabase.createClient(CFG.url,CFG.key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});var r=await client.auth.getSession();if(r.error)throw r.error;if(r.data.session)showDashboard(r.data.session.user);else showLogin('Bitte melde dich an.');client.auth.onAuthStateChange(function(ev,session){if(ev==='SIGNED_OUT'||!session)showLogin('Du wurdest abgemeldet.');else if(ev==='SIGNED_IN'||ev==='TOKEN_REFRESHED')showDashboard(session.user);});}catch(e){showLogin('Anmeldung konnte nicht initialisiert werden: '+(e.message||e));}}
+    async function authenticate(signup){if(busy)return;var email=document.getElementById('auth-email').value.trim(),password=document.getElementById('auth-password').value;if(!email||password.length<6){say('Bitte E-Mail und ein Passwort mit mindestens 6 Zeichen eingeben.');return;}busy=true;Array.from(form.querySelectorAll('button')).forEach(function(b){b.disabled=true;});say(signup?'Konto wird erstellt …':'Anmeldung läuft …');try{if(!client)throw new Error('Verbindung zu Supabase fehlt. Bitte Seite neu laden.');var r=signup?await client.auth.signUp({email:email,password:password}):await client.auth.signInWithPassword({email:email,password:password});if(r.error)throw r.error;if(r.data.session){showDashboard(r.data.session.user);}else if(signup){say('Konto wurde erstellt. Bitte bestätige gegebenenfalls die E-Mail-Adresse und melde dich danach an.');}else{say('Keine aktive Sitzung erhalten. Bitte erneut versuchen.');}}catch(e){say(e.message||String(e));}finally{busy=false;Array.from(form.querySelectorAll('button')).forEach(function(b){b.disabled=false;});}}
+    form.addEventListener('submit',function(e){e.preventDefault();authenticate(false);});
+    document.getElementById('signup-button').addEventListener('click',function(){authenticate(true);});
+    document.getElementById('logout-button').addEventListener('click',async function(){try{await client.auth.signOut();showLogin('Du wurdest abgemeldet.');}catch(e){alert('Abmelden fehlgeschlagen: '+(e.message||e));}});
+    init();
+  })();
+  </script>
 </body>
 </html>
