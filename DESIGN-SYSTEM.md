@@ -53,3 +53,7 @@ The dashboard uses the shared champagne accent. Tasks use sage, Finance uses for
 3. Keep semantic success, warning, and danger states distinct from decorative accents.
 4. Validate both themes, narrow mobile layouts, forms, dialogs, data tables, and app navigation after UI changes.
 5. Do not rename application data keys, database tables, Supabase settings, or functional element IDs as part of visual work.
+
+## Finance header navigation
+
+The Finance page uses the same compact cross-app header pattern as Fitness: a left-side app identity and a right-side row of app links with the theme control beside them. The internal Finance section navigation remains unchanged. On narrow screens the shared header wraps into a brand row and a compact link row instead of overlaying the page content.
