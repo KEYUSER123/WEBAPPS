@@ -41,14 +41,46 @@
   #startup-status pre { margin-top: 12px; white-space: pre-wrap; overflow:auto; color:#fda4af; }
 </style>
 <link rel="stylesheet" href="../workspace-design.css">
+<style id="finance-fitness-header-match">
+  #finance-global-header{position:relative;z-index:50;width:calc(100% - 44px);max-width:1136px;margin:0 auto;padding:15px 0 18px;box-sizing:border-box;background:transparent;border:0;color:var(--at-text);font-family:Inter,"SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  #finance-global-header .finance-header-inner{display:flex;align-items:center;justify-content:space-between;gap:14px;min-width:0;width:100%;padding:0 0 18px;border-bottom:1px solid var(--at-line);box-sizing:border-box}
+  #finance-global-header .finance-brand{display:flex;align-items:center;gap:12px;flex:0 0 auto;min-width:0;width:auto;color:var(--at-text)}
+  #finance-global-header .finance-brand-mark{display:grid;place-items:center;width:42px;height:42px;flex:0 0 42px;padding:0;border:0;border-radius:10px;background:#D8A18D;color:#191C21;font:850 17px/1 Inter,"SF Pro Display",sans-serif;letter-spacing:-.06em}
+  #finance-global-header .finance-brand h1{margin:0;color:var(--at-text);font:750 18px/1.18 Inter,"SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:-.035em}
+  #finance-global-header .finance-brand p{margin:5px 0 0;color:var(--at-muted);font:400 11px/1.3 Inter,"SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;white-space:nowrap}
+  #finance-global-header .finance-header-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;min-width:0;flex:0 0 auto}
+  #finance-global-header #app-switcher{position:static;display:flex;align-items:center;justify-content:flex-start;gap:8px;flex:0 0 auto;flex-wrap:nowrap;margin:0;padding:0;font:600 12px/1.2 Inter,"SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  #finance-global-header #app-switcher .app-nav-link{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:42px;box-sizing:border-box;padding:0 11px;border:1px solid var(--at-line)!important;border-radius:10px!important;background:var(--at-surface)!important;color:var(--at-text)!important;text-decoration:none;font:600 12px/1.2 Inter,"SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;white-space:nowrap;box-shadow:none!important}
+  #finance-global-header #app-switcher .app-nav-link:hover{border-color:color-mix(in srgb,var(--at-accent) 60%,var(--at-line))!important;background:var(--at-raised)!important}
+  #finance-global-header #finance-cloud-status{appearance:none;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;min-height:32px;margin:0;padding:0 1px;border:0!important;border-radius:0!important;background:transparent!important;color:var(--at-muted)!important;font:400 11px/1.25 Inter,"SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;white-space:nowrap;box-shadow:none!important;cursor:pointer}
+  #finance-global-header #finance-cloud-status:hover{color:var(--at-text)!important}
+  #finance-global-header .finance-theme-button,#finance-global-header .finance-header-button{appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:42px;margin:0;padding:0 13px;border:1px solid var(--at-line)!important;border-radius:10px!important;background:transparent!important;color:var(--at-text)!important;box-shadow:none!important;font:650 12px/1.2 Inter,"SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;white-space:nowrap;cursor:pointer}
+  #finance-global-header .finance-theme-button:hover,#finance-global-header .finance-header-button:hover{border-color:color-mix(in srgb,var(--at-accent) 60%,var(--at-line))!important;background:var(--at-raised)!important}
+  #finance-global-header .finance-header-backup{background:var(--at-raised)!important;border-color:var(--at-raised)!important;font-weight:750}
+  #finance-global-header .finance-header-backup:hover{background:var(--at-accent-soft)!important}
+  @media(max-width:1040px){#finance-global-header .finance-header-inner{align-items:flex-start;flex-wrap:wrap;gap:12px}#finance-global-header .finance-brand{width:100%}#finance-global-header .finance-header-actions{width:100%;justify-content:flex-start;flex-wrap:wrap}#finance-global-header #app-switcher{flex-wrap:wrap}}
+  @media(max-width:600px){#finance-global-header{width:calc(100% - 28px);padding-top:12px;padding-bottom:14px}#finance-global-header .finance-header-inner{padding-bottom:14px}#finance-global-header .finance-header-actions{gap:6px}#finance-global-header #app-switcher{gap:6px}#finance-global-header #app-switcher .app-nav-link{min-height:36px;padding:0 9px;font-size:11px}#finance-global-header #finance-cloud-status{order:5;width:100%;justify-content:flex-start;min-height:24px}#finance-global-header .finance-theme-button,#finance-global-header .finance-header-button{min-height:36px;padding:0 10px;font-size:11px}}
+</style>
 </head>
 <body>
 <header id="finance-global-header">
-  <div class="finance-brand" aria-label="Finanzplan">
-    <div class="finance-brand-mark" aria-hidden="true">€</div>
-    <div><h1>FINANZPLAN</h1><p>Budget · Rücklage · Vermögensaufbau</p></div>
+  <div class="finance-header-inner">
+    <div class="finance-brand" aria-label="Finanzplan">
+      <div class="finance-brand-mark" aria-hidden="true">€</div>
+      <div><h1>FINANZPLAN</h1><p>Budget · Rücklage · Vermögensaufbau</p></div>
+    </div>
+    <div class="finance-header-actions">
+      <nav id="app-switcher" aria-label="Zwischen Apps wechseln">
+        <a class="app-nav-link" href="../" title="Zurück zum Dashboard">⌂ Dashboard</a>
+        <a class="app-nav-link" href="../todos/" title="Aufgaben öffnen">☑ Aufgaben</a>
+        <a class="app-nav-link" href="../fitness/" title="Fitness-App öffnen">↗ Fitness</a>
+      </nav>
+      <button id="finance-cloud-status" class="finance-cloud-status" type="button" aria-live="polite" title="Cloud-Speicherstatus und Optionen">Supabase: wird verbunden …</button>
+      <button id="workspace-theme-toggle" class="workspace-theme-toggle finance-theme-button" type="button">☼ Light Mode</button>
+      <button id="finance-backup-button" class="finance-header-button finance-header-backup" type="button">Backup exportieren</button>
+      <button id="finance-import-button" class="finance-header-button" type="button">Import</button>
+    </div>
   </div>
-  <nav id="app-switcher" aria-label="Zwischen Apps wechseln"><a class="app-nav-link" href="../" title="Zurück zum Dashboard">⌂ Dashboard</a><a class="app-nav-link" href="../todos/" title="Aufgaben öffnen">☑ Aufgaben</a><a class="app-nav-link" href="../fitness/" title="Fitness-App öffnen">↗ Fitness</a></nav>
 </header>
 <div id="root"></div>
 <div id="startup-status">Finanzplan wird geladen …</div>
@@ -1419,7 +1451,32 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         day: "2-digit",
         month: "long",
         year: "numeric"
-      }), "</p>\n    ").concat(reportSectionHtml(r), "\n  </body></html>");
+      }), "</p>\n    ").concat(reportSectionHtml(r), "\n  <script id="finance-header-actions-controller">
+(function(){
+  'use strict';
+  function norm(s){return String(s||'').replace(/\s+/g,' ').trim().toLocaleLowerCase('de-DE');}
+  function clickExistingButton(test){
+    var buttons=Array.prototype.slice.call(document.querySelectorAll('#root button'));
+    var matches=buttons.filter(function(b){return test(norm(b.innerText||b.textContent));});
+    var target=matches.find(function(b){return b.getClientRects().length>0;})||matches[0];
+    if(target){target.click();return true;}
+    return false;
+  }
+  var backup=document.getElementById('finance-backup-button');
+  var imp=document.getElementById('finance-import-button');
+  if(backup)backup.addEventListener('click',function(){
+    if(!clickExistingButton(function(t){return t.indexOf('daten sichern (backup)')!==-1;})){
+      console.warn('Der Finanzplan-Backup-Button ist noch nicht verfügbar.');
+    }
+  });
+  if(imp)imp.addEventListener('click',function(){
+    if(!clickExistingButton(function(t){return t.indexOf('daten laden / übernehmen')!==-1;})){
+      console.warn('Der Finanzplan-Import ist noch nicht verfügbar.');
+    }
+  });
+})();
+</script>
+</body></html>");
       win.document.open();
       win.document.write(html);
       win.document.close();
@@ -3490,14 +3547,19 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   }
 
   // ---------- Kleine Cloud-Anzeige (nur Overlay, nie Voraussetzung) ----------
-  var LABEL = { local: "☁ Lokal", offline: "☁ Offline – lokal", login: "☁ Anmelden", saving: "☁ Speichert …", synced: "☁ Synchronisiert", error: "☁ Fehler – lokal gesichert", conflict: "☁ Konflikt!" };
+  var LABEL = { local: "Supabase: lokal", offline: "Supabase: offline · lokal gespeichert", login: "Supabase: Anmeldung nötig", saving: "Supabase: synchronisiert …", synced: "Supabase: synchronisiert", error: "Supabase: Fehler · lokal gesichert", conflict: "Supabase: Konflikt" };
   var badge, panel;
-  function setState(s) { S.state = s; if (badge) badge.textContent = LABEL[s] || s; }
+  function setState(s) { S.state = s; if (badge) { badge.textContent = LABEL[s] || ("Supabase: " + s); badge.setAttribute("data-sync-state", s); } }
   function mkBadge() {
-    badge = document.createElement("button");
-    badge.type = "button";
-    badge.style.cssText = "position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:9998;padding:6px 10px;border-radius:999px;border:1px solid #57534e;background:#1c1917;color:#d6d3d1;font:12px system-ui,sans-serif;opacity:.85;cursor:pointer";
-    badge.onclick = openPanel; document.body.appendChild(badge); setState(S.state);
+    badge = document.getElementById("finance-cloud-status");
+    if (!badge) {
+      badge = document.createElement("button"); badge.type = "button"; badge.id = "finance-cloud-status"; badge.className = "finance-cloud-status";
+      var slot = document.querySelector(".finance-header-actions");
+      if (slot) slot.appendChild(badge); else document.body.appendChild(badge);
+    }
+    badge.style.cssText = "";
+    badge.onclick = openPanel; badge.setAttribute("aria-live", "polite");
+    setState(S.state);
   }
   function btn(t, fn, primary) { var b = document.createElement("button"); b.type = "button"; b.textContent = t; b.onclick = fn; b.style.cssText = "padding:9px 14px;border-radius:8px;border:1px solid #57534e;font-weight:600;cursor:pointer;" + (primary ? "background:#d6d3d1;color:#1c1917" : "background:#292524;color:#e7e5e4"); return b; }
   function closePanel() { if (panel) { panel.remove(); panel = null; } }
