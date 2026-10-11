@@ -1,45 +1,56 @@
-# GitHub Pages – Finanzplan + Fitness-Tracker
+# Workspace – Dashboard, Aufgaben, Finanzplan und Fitness
 
-## Struktur
+Das Repository ist eine statische Website für GitHub Pages. Es verwendet kein Build-System und keine zusätzliche Paketinstallation. Die Apps teilen sich Supabase Auth, speichern ihre jeweiligen Anwendungsdaten aber in getrennten Tabellen.
 
-- `index.html` – Startseite mit Links auf beide Apps
-- `finanzplan/index.html` – bisherige Finanzplan-App (unverändert übernommen)
-- `fitness/index.html` – FORM / FITNESS (unverändert übernommen)
-- `.nojekyll` – deaktiviert Jekyll-Verarbeitung für GitHub Pages
+## Projektstruktur
 
-## Veröffentlichen
+- `index.html` – Login und modernes zentrales Dashboard
+- `todos/index.html` – ToDo-MVP mit Erstellen, Bearbeiten, Löschen, Status, Priorität, Fälligkeit, Bereich und Filtern
+- `finanzplan/index.html` – bestehende Finanzplan-App
+- `fitness/index.html` – bestehende FORM / FITNESS-App
+- `supabase-todos-setup.sql` – Tabelle, Indizes, Trigger und RLS-Policies für ToDos
+- `supabase-fitness-setup.sql` – Cloud-Tabelle und RLS-Policies für Fitnessdaten
 
-1. Entpacke dieses ZIP auf deinem Computer.
-2. Öffne dein bestehendes GitHub-Repository.
-3. Lade den **Inhalt** dieses Ordners ins Repository hoch, nicht den äußeren Ordner `github-pages-paket` als zusätzliche Ebene.
-4. Wichtig: Die bisherige Finanzplan-`index.html` im Repository-Stamm muss durch die neue Dashboard-`index.html` ersetzt werden. Die bisherige Finanzplan-Datei liegt jetzt unter `finanzplan/index.html`.
-5. Committe die Änderungen und warte, bis GitHub Pages neu veröffentlicht hat.
-6. Öffne die Website-URL deines Repositories. Von der Startseite aus führen die Kacheln zu beiden Apps.
+## Supabase einmalig einrichten
 
-Wenn GitHub Pages auf `main` und `/(root)` eingestellt ist, sollte diese Ordnerstruktur direkt funktionieren.
+1. Öffne das richtige Supabase-Projekt und gehe zu **SQL Editor**.
+2. Führe den Inhalt von `supabase-todos-setup.sql` aus, um die ToDo-Tabelle `public.todos` einzurichten.
+3. Falls die Fitness-Cloud-Tabelle `public.fitness_data` noch nicht existiert, führe ebenfalls `supabase-fitness-setup.sql` aus.
+4. Die Finanzplan-App verwendet weiterhin ihre bestehende Tabelle `public.app_data`; dieses Paket ändert deren Schema nicht.
+5. Stelle in Supabase unter Authentication die erlaubten Website-/Redirect-URLs für deine veröffentlichte GitHub-Pages-Adresse ein.
 
-## Hinweise
+Die `todos`-Tabelle nutzt Row Level Security. Ein angemeldeter Nutzer kann nur Zeilen lesen und ändern, bei denen `user_id` seiner eigenen Supabase-User-ID entspricht. Die Frontend-Prüfung ist keine Sicherheitsgrenze; entscheidend sind RLS und die Datenbankrechte.
 
-- Die App-Dateien wurden inhaltlich nicht umgebaut; sie wurden nur in eigene Ordner gelegt.
-- Die Finanzplan-App enthält eine Supabase-Konfiguration. Prüfe in Supabase die erlaubten Redirect-URLs/URLs deiner Website, falls die Anmeldung nach dem Verschieben nicht wie erwartet zurückkehrt.
-- Beide Apps nutzen `localStorage` mit unterschiedlichen Schlüsseln. Browserdaten bleiben grundsätzlich an die Website-Origin gebunden; sichere wichtige Daten vor größeren Änderungen zusätzlich über die Backup-Funktionen der Apps.
-- Dieses Paket richtet noch keine PWA-/Offline-Funktionen ein.
+## Lokal testen
 
+Du kannst die HTML-Dateien direkt im Browser öffnen, für die vollständige Authentifizierung und Cloud-Synchronisierung sollte aber dieselbe Website-Origin über einen lokalen Webserver oder GitHub Pages verwendet werden. Die Projektdateien benötigen keine npm-Installation. Der Supabase-JavaScript-Client wird vom CDN geladen.
 
-## Gemeinsamer Login und Fitness-Cloud-Speicherung
+## Auf GitHub Pages veröffentlichen
 
-- Die Dashboard-Startseite verlangt jetzt eine Supabase-Anmeldung. Finanzplan und Fitness verwenden dieselbe Supabase-Projektkonfiguration und denselben Browser-Login.
-- Die Fitness-App lädt/speichert ihren bisherigen Gesamtzustand als JSONB in `public.fitness_data`. Die lokale Speicherung im Browser bleibt als Offline-Kopie bestehen.
-- **Einmalig vor der Fitness-Cloud-Synchronisierung:** Öffne Supabase → SQL Editor und führe `supabase-fitness-setup.sql` aus. Die Tabelle hat Row Level Security (RLS); jeder angemeldete Benutzer darf nur seine eigene Zeile lesen/schreiben.
-- Die Finanzplan-App verwendet weiterhin ihre vorhandene Tabelle `app_data`; diese wird durch das Paket nicht verändert.
-- Wenn auf einem Gerät bereits Fitnessdaten liegen und in der Cloud ebenfalls andere Daten gefunden werden, fragt die Fitness-App, welche Version verwendet werden soll. Ohne Cloud-Zeile werden vorhandene lokale Daten beim ersten Start hochgeladen.
-- Nach dem Ausführen des SQL: alle Dateien im ZIP-Paket-Ordner in das GitHub-Repository hochladen (nicht den übergeordneten Ordner als zusätzliche Ebene).
-- Prüfe beim ersten Test zuerst, ob Login/Logout funktioniert und anschließend, ob ein neu erstelltes Training nach Neuladen und auf einem zweiten Gerät noch vorhanden ist.
+1. Entpacke das Paket.
+2. Lade den **Inhalt** des Ordners `WEBAPPS-main` ins Repository hoch, nicht den äußeren Ordner als zusätzliche Ebene.
+3. Achte darauf, dass `index.html` im Veröffentlichungsstamm liegt und `todos/`, `finanzplan/` sowie `fitness/` daneben liegen.
+4. Committe die Änderungen und warte auf den GitHub-Pages-Deploy.
+5. Teste die Anmeldung, das Erstellen und Erledigen einer Aufgabe sowie das Neuladen der ToDo-Seite.
 
-## Sicherheitshinweis
+## Funktionsumfang der ToDo-Version
 
-Die im Frontend eingetragene Supabase-URL und ein `publishable`/anon-Schlüssel sind für Browser-Apps vorgesehen. Niemals einen `service_role`-Schlüssel in GitHub hochladen. Datensicherheit wird bei dieser Architektur durch Supabase Auth und RLS sichergestellt, nicht durch das Verstecken der Tabellen oder Links.
+- Persönliche Aufgaben mit Titel und optionaler Beschreibung
+- Status: Offen, In Bearbeitung, Erledigt
+- Priorität: Niedrig, Mittel, Hoch
+- Fälligkeitsdatum und Bereich (Allgemein, Privat, Arbeit, Finanzen, Fitness, Studium)
+- Filter: Alle offenen Aufgaben, Heute, Demnächst, Überfällig, Erledigt
+- Suche, Dashboard-Kennzahlen und schnelle Erledigung direkt vom Dashboard
+- Alle Datensätze sind an den angemeldeten Nutzer gebunden
 
+Wiederholungen, Unteraufgaben und echte Projekt-/Listenbeziehungen sind bewusst nicht Teil des ersten MVP. Dafür kann später ein eigenes Datenmodell ergänzt werden.
 
-## Navigation zwischen den Apps
-Im Finanzplan und in der Fitness-App befinden sich nun Links zum Dashboard und zur jeweils anderen App. Da alle Seiten unter demselben GitHub-Pages-Ursprung liegen und dieselbe Supabase-Projektkonfiguration verwenden, bleibt die Supabase-Sitzung beim Wechsel grundsätzlich erhalten. Die Links ersetzen keine Authentifizierungs- oder Datenbank-Sicherheitsregeln.
+## Designrichtung
+
+Das Dashboard kombiniert ruhige Flächen, progressive Offenlegung und reduzierte Navigation, inspiriert von Produktivitäts- und SaaS-Dashboards wie [Linear](https://linear.app/), [Notion](https://www.notion.so/) und den in [SaaSUI Designbeispielen](https://www.saasui.design/blog/best-saas-dashboard-examples) beschriebenen Mustern. Das Ziel ist ein schneller Überblick mit einer klaren nächsten Aktion statt einer überfüllten Startseite.
+
+## Sicherheitshinweise
+
+- Nur den vorgesehenen Supabase Publishable-/anon-Key im Browser verwenden. Niemals einen `service_role`-Key in HTML oder GitHub hochladen.
+- Private Tabellen immer mit passenden RLS-Policies absichern.
+- Bewahre vor größeren Änderungen zusätzlich eigene Backups auf.
