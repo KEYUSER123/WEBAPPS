@@ -20,6 +20,48 @@
     @media(max-width:800px){.sidebar{width:auto;inset:auto 0 0 0;height:68px;padding:7px 9px;background:#fff;border-right:0;border-top:1px solid var(--line);display:block}.brand,.nav-label,.sidebar-bottom{display:none}.nav{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;height:100%}.nav-link{flex-direction:column;justify-content:center;gap:2px;padding:4px;font-size:10px;border-radius:10px}.nav-icon{font-size:18px}.main{margin:0;padding:20px 17px 90px}.topbar{margin-bottom:19px}.top-actions{gap:6px}.date-chip{display:none}.welcome{min-height:0;padding:25px 23px}.welcome-art{display:none}.welcome h1{font-size:30px}.stats{gap:9px}.stat-card{padding:14px}.stat-top{align-items:flex-start;font-size:10px}.stat-icon{width:29px;height:29px}.stat-value{font-size:24px}.stat-foot{font-size:10px}.content-grid{grid-template-columns:1fr;gap:13px}.section-head{margin-top:24px}.auth-wrap{grid-template-columns:1fr}.auth-brand-side{display:none}.auth-main{min-height:100vh;padding:25px}.auth-card{width:min(100%,400px)}}
     @media(max-width:420px){.main{padding:15px 12px 86px}.topbar{align-items:center}.crumb{font-size:11px}.top-actions .btn{padding:8px 10px;font-size:11px}.welcome{border-radius:17px;padding:22px 18px}.welcome h1{font-size:27px}.welcome p{font-size:12px}.stats{gap:7px}.stat-card{padding:11px}.stat-top{display:block}.stat-icon{margin-bottom:7px}.stat-value{font-size:22px}.stat-foot{line-height:1.3}.panel-head{padding:17px 15px 12px}.task-list{padding:0 15px 8px}.apps-grid{padding:0 12px 12px}.panel-foot{padding:12px 15px}}
   </style>
+<style id="workspace-design-system">
+:root{--ws-bg:#f6f7fb;--ws-surface:#fff;--ws-surface-soft:#f9fafc;--ws-line:#e7e9f0;--ws-text:#202333;--ws-muted:#767c90;--ws-primary:#6558e8;--ws-shadow:0 8px 30px rgba(36,43,76,.055)}
+html[data-theme="dark"]{color-scheme:dark;--ws-bg:#141720;--ws-surface:#1d2230;--ws-surface-soft:#242a3a;--ws-line:#343b4d;--ws-text:#edf0f8;--ws-muted:#a5aec2;--ws-primary:#aaa0ff;--ws-shadow:0 8px 30px rgba(0,0,0,.20)}
+html{color-scheme:light;scroll-behavior:smooth}html[data-theme="dark"]{color-scheme:dark}
+body{transition:background-color .18s ease,color .18s ease}
+.workspace-theme-toggle{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:38px;padding:9px 12px;border:1px solid var(--ws-line);border-radius:11px;background:var(--ws-surface);color:var(--ws-text);box-shadow:0 2px 8px rgba(20,24,40,.045);font:650 12px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;white-space:nowrap;cursor:pointer;transition:background-color .18s,border-color .18s,transform .18s}
+.workspace-theme-toggle:hover{transform:translateY(-1px);border-color:var(--ws-primary)}.workspace-theme-toggle:focus-visible{outline:3px solid #a9a0ff;outline-offset:2px}.workspace-theme-toggle .theme-icon{font-size:15px;line-height:1}
+@media(max-width:700px){.workspace-theme-toggle{min-height:34px;padding:7px 9px;font-size:11px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}}
+</style><style id="workspace-surface-polish">
+html[data-theme="dark"] body{background:var(--ws-bg)!important;color:var(--ws-text)!important}
+html[data-theme="dark"] .sidebar,html[data-theme="dark"] .panel,html[data-theme="dark"] .metric,html[data-theme="dark"] .stat-card,html[data-theme="dark"] .app-card,html[data-theme="dark"] .task-card,html[data-theme="dark"] .date-chip,html[data-theme="dark"] .btn:not(.btn-primary):not(.primary),html[data-theme="dark"] .btn:not(.primary),html[data-theme="dark"] .dialog,html[data-theme="dark"] .dialog-card,html[data-theme="dark"] .modal,html[data-theme="dark"] .aside-note,html[data-theme="dark"] .empty-icon,html[data-theme="dark"] .auth-main,html[data-theme="dark"] .auth-card{background:var(--ws-surface)!important;color:var(--ws-text)!important;border-color:var(--ws-line)!important}
+html[data-theme="dark"] .auth-wrap{background:var(--ws-bg)!important}
+html[data-theme="dark"] input,html[data-theme="dark"] select,html[data-theme="dark"] textarea{background:var(--ws-surface-soft)!important;color:var(--ws-text)!important;border-color:var(--ws-line)!important}
+html[data-theme="dark"] input::placeholder,html[data-theme="dark"] textarea::placeholder{color:#8790a6!important}
+html[data-theme="dark"] .nav a,html[data-theme="dark"] .nav-link{color:var(--ws-muted)!important}
+html[data-theme="dark"] .nav a:hover,html[data-theme="dark"] .nav-link:hover{background:#282e40!important;color:var(--ws-text)!important}
+html[data-theme="dark"] .nav a.active,html[data-theme="dark"] .nav-link.active{background:#343052!important;color:#c5bdff!important}
+html[data-theme="dark"] .task-row,html[data-theme="dark"] .panel-foot,html[data-theme="dark"] .profile,html[data-theme="dark"] .task-card,html[data-theme="dark"] .item{border-color:var(--ws-line)!important}
+html[data-theme="dark"] .task-toggle{background:var(--ws-surface-soft);border-color:#566079;color:#fff}
+html[data-theme="dark"] .tag,html[data-theme="dark"] .pill{background:#2b3245;color:#d8dcf0}
+html[data-theme="dark"] .empty strong,html[data-theme="dark"] .field label,html[data-theme="dark"] .crumb strong,html[data-theme="dark"] .profile-name{color:var(--ws-text)!important}
+html[data-theme="dark"] .notice{background:#3b3121;color:#f2d6a0}
+html[data-theme="dark"] .filter,html[data-theme="dark"] .action{color:var(--ws-muted)}
+html[data-theme="dark"] .filter.active{background:#343052;color:#d4ceff}
+html[data-theme="dark"] .sidebar{box-shadow:0 0 0 1px var(--ws-line)}
+html[data-theme="dark"] .welcome,html[data-theme="dark"] .auth-brand-side{filter:saturate(.9)}
+@media(max-width:800px){.top-actions #workspace-theme-toggle{max-width:100%;} }
+@media(max-width:430px){.top-actions{flex-wrap:wrap}.top-actions #workspace-theme-toggle{padding:7px 8px;font-size:10px}}
+
+.panel,.metric,.stat-card,.app-card,.task-card,.item,.photoCard,.dialog,.modal{border-radius:16px}
+input,select,textarea{border-radius:10px}
+.panel,.metric,.stat-card,.app-card,.task-card,.item{transition:background-color .18s,border-color .18s,box-shadow .18s,transform .18s}
+.app-card:focus-visible,.nav-link:focus-visible,.nav a:focus-visible{outline:3px solid #a9a0ff;outline-offset:3px}
+</style>
+<style id="workspace-interaction-polish">
+button,a,input,select,textarea{ -webkit-tap-highlight-color:transparent }
+button,input,select,textarea{transition:background-color .16s ease,color .16s ease,border-color .16s ease,box-shadow .16s ease}
+input,select,textarea{max-width:100%;min-width:0}
+button:disabled{opacity:.55;cursor:not-allowed;transform:none!important}
+@media(max-width:700px){.main,.app{overflow-wrap:anywhere}.topbar,.page-heading,.sectionhead{min-width:0}}
+</style>
 </head>
 <body>
   <section id="auth-screen" class="auth-wrap" hidden aria-labelledby="auth-title">
@@ -74,5 +116,42 @@
     init();
   })();
   </script>
+<script id="workspace-theme-controller">
+(function(){
+  'use strict';
+  var KEY='workspace-theme';
+  function safeGet(){try{var v=localStorage.getItem(KEY);return v==='dark'||v==='light'?v:'light'}catch(e){return 'light'}}
+  var theme=safeGet();
+  function apply(next,persist){
+    theme=next==='dark'?'dark':'light';
+    document.documentElement.dataset.theme=theme;
+    document.documentElement.style.colorScheme=theme;
+    var meta=document.querySelector('meta[name="theme-color"]');
+    if(meta)meta.setAttribute('content',theme==='dark'?'#141720':'#f6f7fb');
+    if(persist!==false){try{localStorage.setItem(KEY,theme)}catch(e){}}
+    updateButton();
+    try{document.dispatchEvent(new CustomEvent('workspace-theme-change',{detail:theme}))}catch(e){}
+  }
+  function updateButton(){
+    var b=document.getElementById('workspace-theme-toggle');if(!b)return;
+    var dark=theme==='dark';b.innerHTML='<span class="theme-icon" aria-hidden="true">'+(dark?'☀':'☾')+'</span><span>'+(dark?'Light Mode':'Dark Mode')+'</span>';
+    b.setAttribute('aria-label',dark?'Helles Design aktivieren':'Dunkles Design aktivieren');b.setAttribute('aria-pressed',String(dark));
+  }
+  function mount(){
+    document.documentElement.dataset.theme=theme;document.documentElement.style.colorScheme=theme;
+    var existing=document.getElementById('themeBtn');
+    if(existing){existing.classList.add('workspace-native-theme-button');existing.setAttribute('aria-label','Darstellung wechseln');return;}
+    var slot=document.querySelector('.top-actions')||document.querySelector('.topactions')||document.getElementById('app-switcher');
+    if(!slot)slot=document.body;
+    var b=document.createElement('button');b.type='button';b.id='workspace-theme-toggle';b.className='workspace-theme-toggle';b.addEventListener('click',function(){apply(theme==='dark'?'light':'dark')});
+    if(slot===document.body){b.style.position='fixed';b.style.right='16px';b.style.bottom='16px';b.style.zIndex='100000';}
+    if(slot.id==='app-switcher'){b.style.position='fixed';b.style.top='10px';b.style.right='12px';b.style.zIndex='100000';}
+    slot.appendChild(b);updateButton();
+  }
+  window.workspaceSetTheme=function(t){apply(t)};
+  window.addEventListener('storage',function(e){if(e.key===KEY&&(e.newValue==='dark'||e.newValue==='light'))apply(e.newValue,false)});
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount,{once:true});else mount();
+})();
+</script>
 </body>
 </html>

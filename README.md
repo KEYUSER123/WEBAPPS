@@ -54,3 +54,10 @@ Das Dashboard kombiniert ruhige Flächen, progressive Offenlegung und reduzierte
 - Nur den vorgesehenen Supabase Publishable-/anon-Key im Browser verwenden. Niemals einen `service_role`-Key in HTML oder GitHub hochladen.
 - Private Tabellen immer mit passenden RLS-Policies absichern.
 - Bewahre vor größeren Änderungen zusätzlich eigene Backups auf.
+
+
+## Einheitliches Design und Theme
+
+Dashboard, Aufgaben, Finanzplan und Fitness teilen sich den Theme-Schlüssel `workspace-theme` im Browser (`light` oder `dark`). Auf den drei Seiten ohne eigenen Theme-Button wird der Wechsel über den Workspace-Button angeboten; in der Fitness-App wird der vorhandene Theme-Button verwendet. Die Auswahl wird lokal im selben Browser gespeichert und beim Navigieren zwischen den Apps wiederverwendet.
+
+Hinweis: Browser-Speicher ist pro Browser und Origin getrennt. Auf unterschiedlichen Domains oder separaten lokalen Vorschau-URLs wird die Einstellung daher nicht automatisch geteilt.
