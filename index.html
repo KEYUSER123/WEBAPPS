@@ -62,6 +62,35 @@ input,select,textarea{max-width:100%;min-width:0}
 button:disabled{opacity:.55;cursor:not-allowed;transform:none!important}
 @media(max-width:700px){.main,.app{overflow-wrap:anywhere}.topbar,.page-heading,.sectionhead{min-width:0}}
 </style>
+
+<style id="dashboard-darkmode-coverage">
+html[data-theme="dark"] body,
+html[data-theme="dark"] #auth-screen,
+html[data-theme="dark"] #app,
+html[data-theme="dark"] main,
+html[data-theme="dark"] .main,
+html[data-theme="dark"] .content,
+html[data-theme="dark"] .dashboard,
+html[data-theme="dark"] .auth-wrap { background:var(--ws-bg)!important; color:var(--ws-text)!important; }
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .app-tile,
+html[data-theme="dark"] .app-card,
+html[data-theme="dark"] .welcome-card,
+html[data-theme="dark"] .quick-card,
+html[data-theme="dark"] .widget,
+html[data-theme="dark"] .section,
+html[data-theme="dark"] .auth-card,
+html[data-theme="dark"] .auth-panel { background:var(--ws-surface)!important; color:var(--ws-text)!important; border-color:var(--ws-line)!important; }
+html[data-theme="dark"] h1,html[data-theme="dark"] h2,html[data-theme="dark"] h3,
+html[data-theme="dark"] p,html[data-theme="dark"] label,html[data-theme="dark"] strong,
+html[data-theme="dark"] .muted,html[data-theme="dark"] small { color:var(--ws-text); }
+html[data-theme="dark"] input,html[data-theme="dark"] select,html[data-theme="dark"] textarea {
+ background:var(--ws-surface-soft)!important;color:var(--ws-text)!important;border-color:var(--ws-line)!important;
+}
+#workspace-theme-toggle { position:fixed!important;top:14px!important;right:14px!important;bottom:auto!important;z-index:2147483000!important; }
+body { padding-top:0; }
+</style>
+
 </head>
 <body>
   <section id="auth-screen" class="auth-wrap" hidden aria-labelledby="auth-title">
@@ -139,14 +168,19 @@ button:disabled{opacity:.55;cursor:not-allowed;transform:none!important}
   }
   function mount(){
     document.documentElement.dataset.theme=theme;document.documentElement.style.colorScheme=theme;
-    var existing=document.getElementById('themeBtn');
-    if(existing){existing.classList.add('workspace-native-theme-button');existing.setAttribute('aria-label','Darstellung wechseln');return;}
-    var slot=document.querySelector('.top-actions')||document.querySelector('.topactions')||document.getElementById('app-switcher');
-    if(!slot)slot=document.body;
-    var b=document.createElement('button');b.type='button';b.id='workspace-theme-toggle';b.className='workspace-theme-toggle';b.addEventListener('click',function(){apply(theme==='dark'?'light':'dark')});
-    if(slot===document.body){b.style.position='fixed';b.style.right='16px';b.style.bottom='16px';b.style.zIndex='100000';}
-    if(slot.id==='app-switcher'){b.style.position='fixed';b.style.top='10px';b.style.right='12px';b.style.zIndex='100000';}
-    slot.appendChild(b);updateButton();
+    var b=document.getElementById('workspace-theme-toggle');
+    if(!b){
+      b=document.createElement('button');
+      b.type='button';b.id='workspace-theme-toggle';b.className='workspace-theme-toggle';
+      document.body.appendChild(b);
+    }
+    b.classList.add('workspace-theme-toggle');
+    b.style.position='fixed';b.style.top='14px';b.style.right='14px';b.style.bottom='auto';b.style.zIndex='2147483000';
+    if(!b.dataset.themeHandler){
+      b.addEventListener('click',function(){apply(theme==='dark'?'light':'dark')});
+      b.dataset.themeHandler='1';
+    }
+    updateButton();
   }
   window.workspaceSetTheme=function(t){apply(t)};
   window.addEventListener('storage',function(e){if(e.key===KEY&&(e.newValue==='dark'||e.newValue==='light'))apply(e.newValue,false)});
