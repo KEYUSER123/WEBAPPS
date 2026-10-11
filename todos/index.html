@@ -1,6 +1,7 @@
 <!doctype html>
-<html lang="de">
+<html data-app="tasks" lang="de">
 <head>
+<script id="workspace-theme-bootstrap">(function(){var t='light';try{var v=localStorage.getItem('workspace-theme');if(v==='dark'||v==='light')t=v;}catch(e){}document.documentElement.dataset.theme=t;})();</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f6f7fb">
@@ -15,51 +16,10 @@
     @media(max-width:700px){.sidebar{inset:auto 0 0;width:auto;height:66px;padding:6px 8px;border-right:0;border-top:1px solid var(--line);display:block}.brand,.nav-label,.aside-note{display:none}.nav{display:grid;grid-template-columns:repeat(4,1fr);height:100%;gap:4px}.nav a{flex-direction:column;gap:1px;justify-content:center;padding:3px;font-size:10px}.nav-icon{font-size:18px}.main{margin:0;padding:17px 14px 87px}.topbar{margin-bottom:23px}.page-heading{align-items:flex-start}.page-heading .btn{white-space:nowrap}.page-heading h1{font-size:29px}.page-heading p{font-size:11px}.metrics{gap:8px}.metric{padding:12px}.metric-value{font-size:23px}.metric-label{font-size:10px}.metric-sub{font-size:9px}.toolrow{padding:14px}.filters{gap:1px}.filter{padding:7px 8px;font-size:10px}.task-list{padding:0 14px}.task-card{gap:9px}.task-actions{flex-direction:column}.dialog-head{padding:20px 18px 13px}.form-body{padding:6px 18px 19px}}
     @media(max-width:430px){.main{padding:14px 10px 84px}.top-actions .btn{padding:8px 9px;font-size:10px}.crumb{font-size:10px}.metrics{grid-template-columns:repeat(3,minmax(0,1fr))}.metric{padding:10px 8px}.metric-value{font-size:20px}.metric-label{min-height:27px}.page-heading h1{font-size:27px}.page-heading .btn{padding:9px;font-size:10px}.task-card{padding:14px 0}.two-cols{grid-template-columns:1fr}.task-actions{gap:0}.action{width:26px;height:27px}}
   </style>
-<style id="workspace-design-system">
-:root{--ws-bg:#f6f7fb;--ws-surface:#fff;--ws-surface-soft:#f9fafc;--ws-line:#e7e9f0;--ws-text:#202333;--ws-muted:#767c90;--ws-primary:#6558e8;--ws-shadow:0 8px 30px rgba(36,43,76,.055)}
-html[data-theme="dark"]{color-scheme:dark;--ws-bg:#141720;--ws-surface:#1d2230;--ws-surface-soft:#242a3a;--ws-line:#343b4d;--ws-text:#edf0f8;--ws-muted:#a5aec2;--ws-primary:#aaa0ff;--ws-shadow:0 8px 30px rgba(0,0,0,.20)}
-html{color-scheme:light;scroll-behavior:smooth}html[data-theme="dark"]{color-scheme:dark}
-body{transition:background-color .18s ease,color .18s ease}
-.workspace-theme-toggle{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:38px;padding:9px 12px;border:1px solid var(--ws-line);border-radius:11px;background:var(--ws-surface);color:var(--ws-text);box-shadow:0 2px 8px rgba(20,24,40,.045);font:650 12px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;white-space:nowrap;cursor:pointer;transition:background-color .18s,border-color .18s,transform .18s}
-.workspace-theme-toggle:hover{transform:translateY(-1px);border-color:var(--ws-primary)}.workspace-theme-toggle:focus-visible{outline:3px solid #a9a0ff;outline-offset:2px}.workspace-theme-toggle .theme-icon{font-size:15px;line-height:1}
-@media(max-width:700px){.workspace-theme-toggle{min-height:34px;padding:7px 9px;font-size:11px}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}}
-</style><style id="workspace-surface-polish">
-html[data-theme="dark"] body{background:var(--ws-bg)!important;color:var(--ws-text)!important}
-html[data-theme="dark"] .sidebar,html[data-theme="dark"] .panel,html[data-theme="dark"] .metric,html[data-theme="dark"] .stat-card,html[data-theme="dark"] .app-card,html[data-theme="dark"] .task-card,html[data-theme="dark"] .date-chip,html[data-theme="dark"] .btn:not(.btn-primary):not(.primary),html[data-theme="dark"] .btn:not(.primary),html[data-theme="dark"] .dialog,html[data-theme="dark"] .dialog-card,html[data-theme="dark"] .modal,html[data-theme="dark"] .aside-note,html[data-theme="dark"] .empty-icon,html[data-theme="dark"] .auth-main,html[data-theme="dark"] .auth-card{background:var(--ws-surface)!important;color:var(--ws-text)!important;border-color:var(--ws-line)!important}
-html[data-theme="dark"] .auth-wrap{background:var(--ws-bg)!important}
-html[data-theme="dark"] input,html[data-theme="dark"] select,html[data-theme="dark"] textarea{background:var(--ws-surface-soft)!important;color:var(--ws-text)!important;border-color:var(--ws-line)!important}
-html[data-theme="dark"] input::placeholder,html[data-theme="dark"] textarea::placeholder{color:#8790a6!important}
-html[data-theme="dark"] .nav a,html[data-theme="dark"] .nav-link{color:var(--ws-muted)!important}
-html[data-theme="dark"] .nav a:hover,html[data-theme="dark"] .nav-link:hover{background:#282e40!important;color:var(--ws-text)!important}
-html[data-theme="dark"] .nav a.active,html[data-theme="dark"] .nav-link.active{background:#343052!important;color:#c5bdff!important}
-html[data-theme="dark"] .task-row,html[data-theme="dark"] .panel-foot,html[data-theme="dark"] .profile,html[data-theme="dark"] .task-card,html[data-theme="dark"] .item{border-color:var(--ws-line)!important}
-html[data-theme="dark"] .task-toggle{background:var(--ws-surface-soft);border-color:#566079;color:#fff}
-html[data-theme="dark"] .tag,html[data-theme="dark"] .pill{background:#2b3245;color:#d8dcf0}
-html[data-theme="dark"] .empty strong,html[data-theme="dark"] .field label,html[data-theme="dark"] .crumb strong,html[data-theme="dark"] .profile-name{color:var(--ws-text)!important}
-html[data-theme="dark"] .notice{background:#3b3121;color:#f2d6a0}
-html[data-theme="dark"] .filter,html[data-theme="dark"] .action{color:var(--ws-muted)}
-html[data-theme="dark"] .filter.active{background:#343052;color:#d4ceff}
-html[data-theme="dark"] .sidebar{box-shadow:0 0 0 1px var(--ws-line)}
-html[data-theme="dark"] .welcome,html[data-theme="dark"] .auth-brand-side{filter:saturate(.9)}
-@media(max-width:800px){.top-actions #workspace-theme-toggle{max-width:100%;} }
-@media(max-width:430px){.top-actions{flex-wrap:wrap}.top-actions #workspace-theme-toggle{padding:7px 8px;font-size:10px}}
-
-.panel,.metric,.stat-card,.app-card,.task-card,.item,.photoCard,.dialog,.modal{border-radius:16px}
-input,select,textarea{border-radius:10px}
-.panel,.metric,.stat-card,.app-card,.task-card,.item{transition:background-color .18s,border-color .18s,box-shadow .18s,transform .18s}
-.app-card:focus-visible,.nav-link:focus-visible,.nav a:focus-visible{outline:3px solid #a9a0ff;outline-offset:3px}
-</style>
-<style id="workspace-interaction-polish">
-button,a,input,select,textarea{ -webkit-tap-highlight-color:transparent }
-button,input,select,textarea{transition:background-color .16s ease,color .16s ease,border-color .16s ease,box-shadow .16s ease}
-input,select,textarea{max-width:100%;min-width:0}
-button:disabled{opacity:.55;cursor:not-allowed;transform:none!important}
-@media(max-width:700px){.main,.app{overflow-wrap:anywhere}.topbar,.page-heading,.sectionhead{min-width:0}}
-</style>
+<link rel="stylesheet" href="../workspace-design.css">
 </head>
 <body>
-  <aside class="sidebar" aria-label="Hauptnavigation"><a class="brand" href="../"><span class="mark">W</span><span>Workspace<small>Personal hub</small></span></a><div class="nav-label">Workspace</div><nav class="nav"><a href="../"><span class="nav-icon">⌂</span><span>Dashboard</span></a><a class="active" href="./"><span class="nav-icon">☑</span><span>Aufgaben</span></a><a href="../finanzplan/"><span class="nav-icon">◈</span><span>Finanzplan</span></a><a href="../fitness/"><span class="nav-icon">↗</span><span>Fitness</span></a></nav><div class="aside-note"><strong>Ein Schritt nach dem anderen.</strong>Ordne deine Aufgaben, setze Prioritäten und mach Fortschritt sichtbar.</div></aside>
+  <aside class="sidebar" aria-label="Hauptnavigation"><a class="brand" href="../"><span class="mark">W</span><span>Workspace<small>PERSONAL SYSTEM</small></span></a><div class="nav-label">Workspace</div><nav class="nav"><a href="../"><span class="nav-icon">⌂</span><span>Dashboard</span></a><a class="active" href="./"><span class="nav-icon">☑</span><span>Aufgaben</span></a><a href="../finanzplan/"><span class="nav-icon">◈</span><span>Finanzplan</span></a><a href="../fitness/"><span class="nav-icon">↗</span><span>Fitness</span></a></nav><div class="aside-note"><strong>Ein Schritt nach dem anderen.</strong>Ordne deine Aufgaben, setze Prioritäten und mach Fortschritt sichtbar.</div></aside>
   <main class="main"><div class="topbar"><div class="crumb"><a href="../">Workspace</a> <span aria-hidden="true">/</span> <strong>Aufgaben</strong></div><div class="top-actions"><button class="btn" id="refresh-btn" type="button">↻ Aktualisieren</button><button class="btn primary" id="add-btn" type="button">＋ Neue Aufgabe</button></div></div>
     <header class="page-heading"><div><div class="eyebrow">DEIN FOKUS</div><h1>Aufgaben</h1><p>Alles, was du vorhast – an einem Ort und in deinem Tempo.</p></div></header>
     <section class="metrics" aria-label="Aufgabenstatistik"><article class="metric"><div class="metric-label">Offen</div><div id="metric-open" class="metric-value">—</div><div class="metric-sub">Noch zu erledigen</div></article><article class="metric"><div class="metric-label">Heute fällig</div><div id="metric-today" class="metric-value">—</div><div class="metric-sub">Zeitnah im Blick behalten</div></article><article class="metric"><div class="metric-label">Erledigt</div><div id="metric-done" class="metric-value">—</div><div class="metric-sub">Geschaffte Aufgaben</div></article></section>
@@ -100,36 +60,53 @@ button:disabled{opacity:.55;cursor:not-allowed;transform:none!important}
 (function(){
   'use strict';
   var KEY='workspace-theme';
-  function safeGet(){try{var v=localStorage.getItem(KEY);return v==='dark'||v==='light'?v:'light'}catch(e){return 'light'}}
-  var theme=safeGet();
-  function apply(next,persist){
+  function readTheme(){try{var v=localStorage.getItem(KEY);if(v==='dark'||v==='light')return v;}catch(e){}return 'light';}
+  var theme=readTheme();
+  function getButton(){return document.getElementById('workspace-theme-toggle')||document.getElementById('themeBtn');}
+  function updateButton(){
+    var b=getButton();if(!b)return;
+    var dark=theme==='dark';
+    if(b.id==='themeBtn'){
+      b.textContent=dark?'☀ Light Mode':'☾ Dark Mode';
+      b.classList.add('workspace-native-theme-button');
+    } else {
+      b.innerHTML='<span class="theme-icon" aria-hidden="true">'+(dark?'☼':'◐')+'</span><span>'+(dark?'Light Mode':'Dark Mode')+'</span>';
+      b.classList.add('workspace-theme-toggle');
+    }
+    b.setAttribute('aria-label',dark?'Helles Design aktivieren':'Dunkles Design aktivieren');
+    b.setAttribute('aria-pressed',String(dark));
+    b.title=dark?'Zum Light Mode wechseln':'Zum Dark Mode wechseln';
+  }
+  function apply(next,persist,emit){
     theme=next==='dark'?'dark':'light';
     document.documentElement.dataset.theme=theme;
     document.documentElement.style.colorScheme=theme;
     var meta=document.querySelector('meta[name="theme-color"]');
-    if(meta)meta.setAttribute('content',theme==='dark'?'#141720':'#f6f7fb');
-    if(persist!==false){try{localStorage.setItem(KEY,theme)}catch(e){}}
+    if(meta)meta.setAttribute('content',theme==='dark'?'#101216':'#F5F3EE');
+    if(persist!==false){try{localStorage.setItem(KEY,theme);}catch(e){}}
     updateButton();
-    try{document.dispatchEvent(new CustomEvent('workspace-theme-change',{detail:theme}))}catch(e){}
-  }
-  function updateButton(){
-    var b=document.getElementById('workspace-theme-toggle');if(!b)return;
-    var dark=theme==='dark';b.innerHTML='<span class="theme-icon" aria-hidden="true">'+(dark?'☀':'☾')+'</span><span>'+(dark?'Light Mode':'Dark Mode')+'</span>';
-    b.setAttribute('aria-label',dark?'Helles Design aktivieren':'Dunkles Design aktivieren');b.setAttribute('aria-pressed',String(dark));
+    if(emit!==false){try{document.dispatchEvent(new CustomEvent('workspace-theme-change',{detail:theme}));}catch(e){}}
   }
   function mount(){
-    document.documentElement.dataset.theme=theme;document.documentElement.style.colorScheme=theme;
-    var existing=document.getElementById('themeBtn');
-    if(existing){existing.classList.add('workspace-native-theme-button');existing.setAttribute('aria-label','Darstellung wechseln');return;}
-    var slot=document.querySelector('.top-actions')||document.querySelector('.topactions')||document.getElementById('app-switcher');
-    if(!slot)slot=document.body;
-    var b=document.createElement('button');b.type='button';b.id='workspace-theme-toggle';b.className='workspace-theme-toggle';b.addEventListener('click',function(){apply(theme==='dark'?'light':'dark')});
-    if(slot===document.body){b.style.position='fixed';b.style.right='16px';b.style.bottom='16px';b.style.zIndex='100000';}
-    if(slot.id==='app-switcher'){b.style.position='fixed';b.style.top='10px';b.style.right='12px';b.style.zIndex='100000';}
-    slot.appendChild(b);updateButton();
+    theme=readTheme();
+    document.documentElement.dataset.theme=theme;
+    document.documentElement.style.colorScheme=theme;
+    var b=getButton();
+    if(!b){
+      b=document.createElement('button');b.type='button';b.id='workspace-theme-toggle';b.className='workspace-theme-toggle';
+      var slot=document.querySelector('.top-actions')||document.querySelector('.topactions')||document.getElementById('app-switcher');
+      if(slot&&slot.id==='app-switcher'){
+        document.body.appendChild(b);b.style.position='fixed';b.style.top='12px';b.style.right='14px';b.style.zIndex='100000';
+      } else if(slot){slot.appendChild(b);} else {document.body.appendChild(b);b.style.position='fixed';b.style.top='12px';b.style.right='14px';b.style.zIndex='100000';}
+    }
+    if(b.id!=='themeBtn'&&!b.dataset.themeHandler){
+      b.addEventListener('click',function(){apply(theme==='dark'?'light':'dark',true,true);});
+      b.dataset.themeHandler='1';
+    }
+    updateButton();
   }
-  window.workspaceSetTheme=function(t){apply(t)};
-  window.addEventListener('storage',function(e){if(e.key===KEY&&(e.newValue==='dark'||e.newValue==='light'))apply(e.newValue,false)});
+  window.workspaceSetTheme=function(t){apply(t,true,true);};
+  window.addEventListener('storage',function(e){if(e.key===KEY&&(e.newValue==='dark'||e.newValue==='light'))apply(e.newValue,false,true);});
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount,{once:true});else mount();
 })();
 </script>

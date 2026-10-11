@@ -45,9 +45,11 @@ Du kannst die HTML-Dateien direkt im Browser öffnen, für die vollständige Aut
 
 Wiederholungen, Unteraufgaben und echte Projekt-/Listenbeziehungen sind bewusst nicht Teil des ersten MVP. Dafür kann später ein eigenes Datenmodell ergänzt werden.
 
-## Designrichtung
+## Designrichtung: ATELIER
 
-Das Dashboard kombiniert ruhige Flächen, progressive Offenlegung und reduzierte Navigation, inspiriert von Produktivitäts- und SaaS-Dashboards wie [Linear](https://linear.app/), [Notion](https://www.notion.so/) und den in [SaaSUI Designbeispielen](https://www.saasui.design/blog/best-saas-dashboard-examples) beschriebenen Mustern. Das Ziel ist ein schneller Überblick mit einer klaren nächsten Aktion statt einer überfüllten Startseite.
+Das Workspace-Design folgt einer minimalistischen, hochwertigen Designsprache mit zwei gleichwertigen Themes: **Porcelain** (Light) und **Obsidian** (Dark). Ruhige Flächen, präzise Typografie, zurückhaltende Rahmen und wenige gezielte Akzente ersetzen die vorherige generische SaaS-Optik. Das Dashboard nutzt Champagner als Akzent, Aufgaben Salbei, der Finanzplan Waldgrün und Fitness ein dezentes Terrakotta.
+
+Das gemeinsame Stylesheet liegt in `workspace-design.css`; das vollständige Farb- und Umsetzungs-Konzept steht in [`DESIGN-SYSTEM.md`](DESIGN-SYSTEM.md). Neue UI-Elemente sollen zuerst auf vorhandene Design-Tokens zurückgreifen, statt zusätzliche unabhängige Farbsysteme einzuführen.
 
 ## Sicherheitshinweise
 
@@ -58,6 +60,6 @@ Das Dashboard kombiniert ruhige Flächen, progressive Offenlegung und reduzierte
 
 ## Einheitliches Design und Theme
 
-Dashboard, Aufgaben, Finanzplan und Fitness teilen sich den Theme-Schlüssel `workspace-theme` im Browser (`light` oder `dark`). Auf den drei Seiten ohne eigenen Theme-Button wird der Wechsel über den Workspace-Button angeboten; in der Fitness-App wird der vorhandene Theme-Button verwendet. Die Auswahl wird lokal im selben Browser gespeichert und beim Navigieren zwischen den Apps wiederverwendet.
+Dashboard, Aufgaben, Finanzplan und Fitness verwenden das gemeinsame Stylesheet `workspace-design.css` sowie den Theme-Schlüssel `workspace-theme` (`light` oder `dark`). Beide Themes werden früh im Seitenaufbau aktiviert, damit beim Laden möglichst kein falsches Farbschema aufblitzt. Die Auswahl wird lokal im selben Browser gespeichert und auf den App-Routen derselben Origin wiederverwendet.
 
 Hinweis: Browser-Speicher ist pro Browser und Origin getrennt. Auf unterschiedlichen Domains oder separaten lokalen Vorschau-URLs wird die Einstellung daher nicht automatisch geteilt.

@@ -1,6 +1,7 @@
 <!doctype html>
-<html lang="de">
+<html data-app="fitness" lang="de">
 <head>
+<script id="workspace-theme-bootstrap">(function(){var t='light';try{var v=localStorage.getItem('workspace-theme');if(v==='dark'||v==='light')t=v;}catch(e){}document.documentElement.dataset.theme=t;})();</script>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>FORM / FITNESS</title>
 <style>
@@ -20,32 +21,7 @@
 #fitness-cloud-status{font-size:11px;color:var(--muted);align-self:center}
 .app-nav-link{display:inline-flex;align-items:center;gap:6px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;color:var(--ink);text-decoration:none;font-size:12px;white-space:nowrap}.app-nav-link:hover{border-color:var(--accent)}
 </style>
-<style id="workspace-design-system">
-:root{--ws-bg:#f6f7fb;--ws-surface:#fff;--ws-surface-soft:#f9fafc;--ws-line:#e7e9f0;--ws-text:#202333;--ws-muted:#767c90;--ws-primary:#6558e8;--ws-shadow:0 8px 30px rgba(36,43,76,.055)}
-html[data-theme="dark"]{color-scheme:dark;--ws-bg:#141720;--ws-surface:#1d2230;--ws-surface-soft:#242a3a;--ws-line:#343b4d;--ws-text:#edf0f8;--ws-muted:#a5aec2;--ws-primary:#aaa0ff;--ws-shadow:0 8px 30px rgba(0,0,0,.20)}
-html{color-scheme:light;scroll-behavior:smooth}html[data-theme="dark"]{color-scheme:dark}
-body{transition:background-color .18s ease,color .18s ease}
-.workspace-theme-toggle{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:38px;padding:9px 12px;border:1px solid var(--ws-line);border-radius:11px;background:var(--ws-surface);color:var(--ws-text);box-shadow:0 2px 8px rgba(20,24,40,.045);font:650 12px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;white-space:nowrap;cursor:pointer;transition:background-color .18s,border-color .18s,transform .18s}
-.workspace-theme-toggle:hover{transform:translateY(-1px);border-color:var(--ws-primary)}.workspace-theme-toggle:focus-visible{outline:3px solid #a9a0ff;outline-offset:2px}.workspace-theme-toggle .theme-icon{font-size:15px;line-height:1}
-@media(max-width:700px){.workspace-theme-toggle{min-height:34px;padding:7px 9px;font-size:11px}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}}
-</style>
-<style id="workspace-fitness-polish">
-html[data-theme="light"]{--bg:#f6f7fb;--panel:#fff;--ink:#202333;--muted:#737b90;--line:#e4e7ef;--green:#6558e8;--green2:#efedff;--blue:#e9e9ff;--accent:#f1f0ff;--danger:#c44858;--shadow:0 8px 26px rgba(36,43,76,.055)}
-html[data-theme="dark"]{--bg:#141720;--panel:#1d2230;--ink:#edf0f8;--muted:#a5aec2;--line:#343b4d;--green:#aaa0ff;--green2:#343052;--blue:#2a3348;--accent:#252b3c;--danger:#ff8a9a;--shadow:0 8px 30px rgba(0,0,0,.2)}
-.app-nav-link{display:inline-flex;align-items:center;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);text-decoration:none;font-size:12px;font-weight:650;white-space:nowrap}
-.app-nav-link:hover{border-color:var(--green)}.topactions{align-items:center}.topactions #themeBtn{white-space:nowrap}
-button:disabled{opacity:.5;cursor:not-allowed}
-.panel,.item,.photoCard{transition:background-color .18s,border-color .18s,box-shadow .18s}
-@media(max-width:760px){.top{flex-wrap:wrap}.topactions{width:100%;gap:6px}.topactions>*{max-width:100%}#fitness-cloud-status{order:10;width:100%;font-size:11px}}
-</style>
-<style id="workspace-interaction-polish">
-button,a,input,select,textarea{ -webkit-tap-highlight-color:transparent }
-button,input,select,textarea{transition:background-color .16s ease,color .16s ease,border-color .16s ease,box-shadow .16s ease}
-input,select,textarea{max-width:100%;min-width:0}
-button:disabled{opacity:.55;cursor:not-allowed;transform:none!important}
-@media(max-width:700px){.main,.app{overflow-wrap:anywhere}.topbar,.page-heading,.sectionhead{min-width:0}}
-</style>
+<link rel="stylesheet" href="../workspace-design.css">
 </head>
 <body>
 <div id="fitness-auth-screen" role="main">
@@ -72,7 +48,7 @@ document.querySelector('#fxExp').onclick=()=>document.querySelector('#exportBtn'
 const r=document.querySelector('#fxReset');r.onclick=()=>{if(r.dataset.arm!=='1'){r.dataset.arm='1';r.textContent='Sicher? Löscht alles';return}try{localStorage.removeItem(KEY)}catch(x){}db=fresh();render()}}
 const KEY='formFitnessIntegratedV1';
 const fresh=()=>({theme:(window.matchMedia&&matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'),exercises:[],workouts:[],plans:[],activePlan:null,history:[],prs:[],measurements:[],foods:[],photos:[],locations:[]});
-let db=load(), page='dashboard';try{const sharedTheme=localStorage.getItem('workspace-theme');if(sharedTheme==='dark'||sharedTheme==='light')db.theme=sharedTheme}catch(e){}
+let db=load(), page='dashboard';try{const sharedTheme=localStorage.getItem('workspace-theme');if(sharedTheme==='dark'||sharedTheme==='light')db.theme=sharedTheme;else localStorage.setItem('workspace-theme',db.theme)}catch(e){}
 function normalize(d){const o={...fresh(),...(d&&typeof d==='object'&&!Array.isArray(d)?d:{})};
 for(const k of ['exercises','workouts','plans','history','prs','measurements','foods','photos','locations'])o[k]=(Array.isArray(o[k])?o[k]:[]).filter(x=>x&&typeof x==='object').map(x=>({...x,id:x.id||id()}));
 o.workouts.forEach(w=>{if(!Array.isArray(w.exerciseIds))w.exerciseIds=[]});o.history.forEach(h=>{if(!Array.isArray(h.exerciseIds))h.exerciseIds=[];if(!h.sets||typeof h.sets!=='object'||Array.isArray(h.sets))h.sets={}});o.plans.forEach(p=>{if(!p.schedule||typeof p.schedule!=='object')p.schedule={}});
@@ -148,7 +124,7 @@ else if(t.matches('[data-rmex]'))t.closest('[data-ex]').remove();
 else if(t.id==='addExBtn'){const x=o.querySelector('#addExSel').value;if(!x){toast('Lege zuerst Übungen an.');return}if(o.querySelector('[data-ex="'+x+'"]')){toast('Übung ist schon dabei.');return}o.querySelector('#exBlocks').append(html(exBlock(x,h)))}})}
 
 
-document.querySelector('#themeBtn').onclick=()=>{db.theme=db.theme==='dark'?'light':'dark';render()};document.addEventListener('workspace-theme-change',function(e){if(e.detail==='dark'||e.detail==='light'){db.theme=e.detail;render()}});
+document.querySelector('#themeBtn').onclick=()=>{if(window.workspaceSetTheme)window.workspaceSetTheme(db.theme==='dark'?'light':'dark');else{db.theme=db.theme==='dark'?'light':'dark';render()}};document.addEventListener('workspace-theme-change',function(e){if(e.detail==='dark'||e.detail==='light'){db.theme=e.detail;render()}});
 document.querySelector('#exportBtn').onclick=async()=>{const j=JSON.stringify(db,null,2),fn='form-fitness-backup-'+new Date().toISOString().slice(0,10)+'.json';try{const d=await claude.use('downloads');if(!d)throw 0;await d.save({filename:fn,data:j})}catch(e){if(e&&e.code==='declined')return;const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([j],{type:'application/json'}));a.download=fn;a.click()}};
 document.querySelector('#importBtn').onclick=()=>document.querySelector('#importFile').click();
 document.querySelector('#importFile').onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let d=JSON.parse(await f.text());db=normalize(d);render();toast('Backup importiert')}catch{toast('Datei ist kein gültiges FORM / FITNESS-Backup')}};
@@ -187,36 +163,53 @@ save();render();
 (function(){
   'use strict';
   var KEY='workspace-theme';
-  function safeGet(){try{var v=localStorage.getItem(KEY);return v==='dark'||v==='light'?v:'light'}catch(e){return 'light'}}
-  var theme=safeGet();
-  function apply(next,persist){
+  function readTheme(){try{var v=localStorage.getItem(KEY);if(v==='dark'||v==='light')return v;}catch(e){}return 'light';}
+  var theme=readTheme();
+  function getButton(){return document.getElementById('workspace-theme-toggle')||document.getElementById('themeBtn');}
+  function updateButton(){
+    var b=getButton();if(!b)return;
+    var dark=theme==='dark';
+    if(b.id==='themeBtn'){
+      b.textContent=dark?'☀ Light Mode':'☾ Dark Mode';
+      b.classList.add('workspace-native-theme-button');
+    } else {
+      b.innerHTML='<span class="theme-icon" aria-hidden="true">'+(dark?'☼':'◐')+'</span><span>'+(dark?'Light Mode':'Dark Mode')+'</span>';
+      b.classList.add('workspace-theme-toggle');
+    }
+    b.setAttribute('aria-label',dark?'Helles Design aktivieren':'Dunkles Design aktivieren');
+    b.setAttribute('aria-pressed',String(dark));
+    b.title=dark?'Zum Light Mode wechseln':'Zum Dark Mode wechseln';
+  }
+  function apply(next,persist,emit){
     theme=next==='dark'?'dark':'light';
     document.documentElement.dataset.theme=theme;
     document.documentElement.style.colorScheme=theme;
     var meta=document.querySelector('meta[name="theme-color"]');
-    if(meta)meta.setAttribute('content',theme==='dark'?'#141720':'#f6f7fb');
-    if(persist!==false){try{localStorage.setItem(KEY,theme)}catch(e){}}
+    if(meta)meta.setAttribute('content',theme==='dark'?'#101216':'#F5F3EE');
+    if(persist!==false){try{localStorage.setItem(KEY,theme);}catch(e){}}
     updateButton();
-    try{document.dispatchEvent(new CustomEvent('workspace-theme-change',{detail:theme}))}catch(e){}
-  }
-  function updateButton(){
-    var b=document.getElementById('workspace-theme-toggle');if(!b)return;
-    var dark=theme==='dark';b.innerHTML='<span class="theme-icon" aria-hidden="true">'+(dark?'☀':'☾')+'</span><span>'+(dark?'Light Mode':'Dark Mode')+'</span>';
-    b.setAttribute('aria-label',dark?'Helles Design aktivieren':'Dunkles Design aktivieren');b.setAttribute('aria-pressed',String(dark));
+    if(emit!==false){try{document.dispatchEvent(new CustomEvent('workspace-theme-change',{detail:theme}));}catch(e){}}
   }
   function mount(){
-    document.documentElement.dataset.theme=theme;document.documentElement.style.colorScheme=theme;
-    var existing=document.getElementById('themeBtn');
-    if(existing){existing.classList.add('workspace-native-theme-button');existing.setAttribute('aria-label','Darstellung wechseln');return;}
-    var slot=document.querySelector('.top-actions')||document.querySelector('.topactions')||document.getElementById('app-switcher');
-    if(!slot)slot=document.body;
-    var b=document.createElement('button');b.type='button';b.id='workspace-theme-toggle';b.className='workspace-theme-toggle';b.addEventListener('click',function(){apply(theme==='dark'?'light':'dark')});
-    if(slot===document.body){b.style.position='fixed';b.style.right='16px';b.style.bottom='16px';b.style.zIndex='100000';}
-    if(slot.id==='app-switcher'){b.style.position='fixed';b.style.top='10px';b.style.right='12px';b.style.zIndex='100000';}
-    slot.appendChild(b);updateButton();
+    theme=readTheme();
+    document.documentElement.dataset.theme=theme;
+    document.documentElement.style.colorScheme=theme;
+    var b=getButton();
+    if(!b){
+      b=document.createElement('button');b.type='button';b.id='workspace-theme-toggle';b.className='workspace-theme-toggle';
+      var slot=document.querySelector('.top-actions')||document.querySelector('.topactions')||document.getElementById('app-switcher');
+      if(slot&&slot.id==='app-switcher'){
+        document.body.appendChild(b);b.style.position='fixed';b.style.top='12px';b.style.right='14px';b.style.zIndex='100000';
+      } else if(slot){slot.appendChild(b);} else {document.body.appendChild(b);b.style.position='fixed';b.style.top='12px';b.style.right='14px';b.style.zIndex='100000';}
+    }
+    if(b.id!=='themeBtn'&&!b.dataset.themeHandler){
+      b.addEventListener('click',function(){apply(theme==='dark'?'light':'dark',true,true);});
+      b.dataset.themeHandler='1';
+    }
+    updateButton();
   }
-  window.workspaceSetTheme=function(t){apply(t)};
-  window.addEventListener('storage',function(e){if(e.key===KEY&&(e.newValue==='dark'||e.newValue==='light'))apply(e.newValue,false)});
+  window.workspaceSetTheme=function(t){apply(t,true,true);};
+  window.addEventListener('storage',function(e){if(e.key===KEY&&(e.newValue==='dark'||e.newValue==='light'))apply(e.newValue,false,true);});
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount,{once:true});else mount();
 })();
 </script>
