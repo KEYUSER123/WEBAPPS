@@ -1451,32 +1451,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         day: "2-digit",
         month: "long",
         year: "numeric"
-      }), "</p>\n    ").concat(reportSectionHtml(r), "\n  <script id="finance-header-actions-controller">
-(function(){
-  'use strict';
-  function norm(s){return String(s||'').replace(/\s+/g,' ').trim().toLocaleLowerCase('de-DE');}
-  function clickExistingButton(test){
-    var buttons=Array.prototype.slice.call(document.querySelectorAll('#root button'));
-    var matches=buttons.filter(function(b){return test(norm(b.innerText||b.textContent));});
-    var target=matches.find(function(b){return b.getClientRects().length>0;})||matches[0];
-    if(target){target.click();return true;}
-    return false;
-  }
-  var backup=document.getElementById('finance-backup-button');
-  var imp=document.getElementById('finance-import-button');
-  if(backup)backup.addEventListener('click',function(){
-    if(!clickExistingButton(function(t){return t.indexOf('daten sichern (backup)')!==-1;})){
-      console.warn('Der Finanzplan-Backup-Button ist noch nicht verfügbar.');
-    }
-  });
-  if(imp)imp.addEventListener('click',function(){
-    if(!clickExistingButton(function(t){return t.indexOf('daten laden / übernehmen')!==-1;})){
-      console.warn('Der Finanzplan-Import ist noch nicht verfügbar.');
-    }
-  });
-})();
-</script>
-</body></html>");
+      }), "</p>\n    ").concat(reportSectionHtml(r), "\n  </body></html>");
       win.document.open();
       win.document.write(html);
       win.document.close();
@@ -3411,6 +3386,32 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     window.__fpFatal && window.__fpFatal(e);
   }
 })();</script>
+
+<script id="finance-header-actions-controller">
+(function(){
+  'use strict';
+  function norm(s){return String(s||'').replace(/\s+/g,' ').trim().toLocaleLowerCase('de-DE');}
+  function clickExistingButton(test){
+    var buttons=Array.prototype.slice.call(document.querySelectorAll('#root button'));
+    var matches=buttons.filter(function(b){return test(norm(b.innerText||b.textContent));});
+    var target=matches.find(function(b){return b.getClientRects().length>0;})||matches[0];
+    if(target){target.click();return true;}
+    return false;
+  }
+  var backup=document.getElementById('finance-backup-button');
+  var imp=document.getElementById('finance-import-button');
+  if(backup)backup.addEventListener('click',function(){
+    if(!clickExistingButton(function(t){return t.indexOf('daten sichern (backup)')!==-1;})){
+      console.warn('Der Finanzplan-Backup-Button ist noch nicht verfügbar.');
+    }
+  });
+  if(imp)imp.addEventListener('click',function(){
+    if(!clickExistingButton(function(t){return t.indexOf('daten laden / übernehmen')!==-1;})){
+      console.warn('Der Finanzplan-Import ist noch nicht verfügbar.');
+    }
+  });
+})();
+</script>
 
 <script>
 (function () {
